@@ -24,7 +24,7 @@ contracts_build_directory: './src/abis/',
   compilers: {
     solc: {     
       optimizer: {
-      enabled: false,
+      enabled: true,
       runs: 200    
     }
   }
