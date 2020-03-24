@@ -191,13 +191,12 @@ contract('Token', ([deployer, receiver, exchange]) => {
 
 		it('weigert ongeldige ontvangers', async () => {
 			await token.transferFrom(deployer, 0x0, amount, { from: exchange }).should.be.rejected
-		})
-	})	
-		
+		  })
+   	   })		
+     })
+   }) 
   })
-}) 
-})
-})
+ })
 })
 
  
