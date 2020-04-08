@@ -67,7 +67,7 @@ const decorateOrder = (order) => {
   let etherAmount
   let tokenAmount
 
-  if(order.tokenGive == ETHER_ADDRESS) {
+  if(order.tokenGive === ETHER_ADDRESS) {
     etherAmount = order.amountGive
     tokenAmount = order.amountGet
   } else {
@@ -173,4 +173,86 @@ const decorateOrderBookOrder = (order) => {
     orderTypeClass: (orderType === 'buy' ? GREEN : RED),
     orderFillClass: orderType === 'buy' ? 'sell' : 'buy'
   })
+}
+
+export const myFilledOrdersLoadedSelector = createSelector(filledOrdersLoaded, loaded => loaded)
+
+export const myFilledOrdersSelector = createSelector(
+	account,
+	filledOrders,
+	(account, orders) => {
+		//find our orders
+		orders = orders.filter((o) => o.user === account || o.userFill === account)
+		//Sort by date ascending
+		orders = orders.sort((a,b) => a.timestamp - b.timestamp)
+		//Decorate orders -add display attributes
+		orders = decorateMyFilledOrders(orders, account)
+		return orders
+		}
+	)
+
+const decorateMyFilledOrders = (orders, account) => {
+	return(
+		orders.map((order) => {
+			order = decorateOrder(order)
+			order = decorateMyFilledOrder(order, account)
+			 return(order)
+		})
+	)
+}
+//first we check if its my order if the account is order.user then its my order
+const decorateMyFilledOrder = (order, account) => {
+	const myOrder = order.user === account
+
+	let orderType
+	if(myOrder) {
+		//if it is my order and the tokengive is ETHER then its a buy order
+		orderType = order.tokenGive === ETHER_ADDRESS ? 'buy' : 'sell'
+	} else {
+		//else its a sell order
+		orderType = order.tokenGive === ETHER_ADDRESS ? 'sell' : 'buy' 
+	}
+// here we want to show semantics colors on the order page
+	return({
+		...order,
+		orderType,
+		orderTypeClass: (orderType === 'buy' ? GREEN : RED),
+		orderSign: (orderType === 'buy' ? '+' : '-')
+	})
+}
+
+export const myOpenOrdersLoadedSelector = createSelector(orderBookLoaded, loaded => loaded)
+
+export const myOpenOrdersSelector = createSelector(
+	account,
+	openOrders,
+	(account, orders) => {
+		//Filter orders created with current account
+		orders = orders.filter((o) => o.user === account)
+		//Decorate orders  -add display attributes
+		orders = decorateMyOpenOrders(orders)
+		// Sort orders b date descending
+		orders = orders.sort((a,b) => b.timestamp - a.timestamp)
+		return orders
+		}
+	)
+
+const decorateMyOpenOrders = (orders, account) => {
+	return(
+		orders.map((order) => {
+			order = decorateOrder(order)
+			order = decorateMyOpenOrder(order, account)
+			return(order)
+		})
+	)
+}
+
+const decorateMyOpenOrder = (order, account) => {
+	let orderType = order.tokenGive === ETHER_ADDRESS ? 'buy' : 'sell'
+
+	return({
+		...order,
+		orderType,
+		orderTypeClass: (orderType === 'buy' ? GREEN : RED)
+	})
 }
