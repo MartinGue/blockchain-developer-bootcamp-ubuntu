@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import 'bootstrap/dist/css/bootstrap.css'
 import { Provider } from 'react-redux'
 import App from './components/App'
 import configureStore from './store/configureStore'
-import 'bootstrap/dist/css/bootstrap.css'
 import * as serviceWorker from './serviceWorker'
 
 

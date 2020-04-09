@@ -6,7 +6,9 @@ import {
 	exchangeLoaded,
 	cancelledOrdersLoaded,
 	filledOrdersLoaded,
-	allOrdersLoaded
+	allOrdersLoaded,
+	orderCancelling,
+	orderCancelled
 } from './actions'
 import Token from '../abis/Token.json'
 import Exchange from '../abis/Exchange.json'
@@ -65,4 +67,24 @@ export const loadAllOrders = async (exchange, dispatch) => {
 	const allOrders = orderStream.map((event) => event.returnValues)
 	// Add all orders to the redux store dispatch an action
 	dispatch(allOrdersLoaded(allOrders))
+}
+
+export const cancelOrder = (dispatch, exchange, order, account) => {
+	//the web3 contract we call the functions on in this case send 
+	exchange.methods.cancelOrder(order.id).send({ from: account })
+	//event emitter
+	.on('transactionHash', (hash) => {
+		// dispatch a redux action
+		dispatch(orderCancelling())
+	})
+	.on('error',(error) => {
+		console.log(error)
+		window.alert('There was an error')
+	})
+}
+
+export const subscribeToEvents = async (exchange, dispatch) => {
+	exchange.events.Cancel({}, (error,event) => {
+		dispatch(orderCancelled(event.returnValues))
+	})
 }
