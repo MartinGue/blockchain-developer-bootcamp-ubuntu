@@ -375,3 +375,10 @@ export const tokenDepositAmountSelector = createSelector(tokenDepositAmount, amo
 
 const tokenWithdrawAmount = state => get(state, 'exchange.tokenWithdrawAmount', null)
 export const tokenWithdrawAmountSelector = createSelector(tokenWithdrawAmount, amount => amount)
+// this is gonna return an object from state thats going to be the buy order
+const buyOrder = state => get(state, 'exchange.buyOrder', {})
+export const buyOrderSelector = createSelector(buyOrder, order => order)
+// this is gonna return an object from state thats going to be the sell order
+const sellOrder = state => get(state, 'exchange.sellOrder', {})
+export const sellOrderSelector = createSelector(sellOrder, order => order)
+

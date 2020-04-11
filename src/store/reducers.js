@@ -88,6 +88,50 @@ function exchange(state = {}, action) {
       return { ...state, tokenDepositAmount: action.amount }
     case 'TOKEN_WITHDRAW_AMOUNT_CHANGED':
       return { ...state, tokenWithdrawAmount: action.amount }
+
+    case 'BUY_ORDER_AMOUNT_CHANGED':
+      return { ...state, buyOrder: { ...state.buyOrder, amount: action.amount } }
+    case 'BUY_ORDER_PRICE_CHANGED':
+      return { ...state, buyOrder: { ...state.buyOrder, price: action.price } }
+    case 'BUY_ORDER_MAKING':
+      return { ...state, buyOrder: { ...state.buyOrder, amount: null, price: null, making: true } }
+
+    case 'ORDER_MADE':
+     	//Prevent duplicate orders
+     	// we wanna check if all orders already contains the order if thats the case then don 't anything else to it
+     	index = state.allOrders.data.findIndex(order => order.id === action.order.id);
+
+     	if(index === -1) {
+     		//if its not there we add it it if its there it remains the same
+     		data= [...state.allOrders.data, action.order]
+     	} else {
+     		data = state.allOrders.data
+     	}
+
+     	//and then we update the order state like this
+     	return {
+     		...state,
+     		allOrders: {
+     		  ...state.allOrders,
+     		  data
+     		},
+     		buyOrder: {
+     			...state.buyOrder,
+     			making: false
+     		},
+     		sellOrder: {
+     			...state.sellOrder,
+     			making: false
+     		}     		
+     	}
+
+    case 'SELL_ORDER_AMOUNT_CHANGED':
+      return { ...state, sellOrder: { ...state.sellOrder, amount: action.amount } }
+    case 'SELL_ORDER_PRICE_CHANGED':
+      return { ...state, sellOrder: { ...state.sellOrder, price: action.price } }
+    case 'SELL_ORDER_MAKING':
+      return { ...state, sellOrder: { ...state.sellOrder, amount: null, price: null, making: true } }
+
     default:
       return state
   }
