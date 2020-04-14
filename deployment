@@ -1,0 +1,66 @@
+
+
+Starting migrations...
+======================
+> Network name:    'kovan'
+> Network id:      42
+> Block gas limit: 9990236
+
+
+1_initial_migration.js
+======================
+
+   Deploying 'Migrations'
+   ----------------------
+   > transaction hash:    0x9cc3de01d68cbe7e5df771f77d240b6cf4344a3b28815c9ca19f0094b47b6a57
+   > Blocks: 1            Seconds: 4
+   > contract address:    0x0b2311D20a6697B2FEFBdedf401EaAcD315bCaAd
+   > account:             0x8aa9085eC8119e01BcbF8Ad57853075104AF834e
+   > balance:             2.801094069
+   > gas used:            175083
+   > gas price:           25 gwei
+   > value sent:          0 ETH
+   > total cost:          0.004377075 ETH
+
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:         0.004377075 ETH
+
+
+2_deploy_contracts.js
+=====================
+
+   Replacing 'Token'
+   -----------------
+   > transaction hash:    0x252a0858302ed248cad89aaefd0668013f243bcb1629160764d309e44010a43c
+   > Blocks: 0            Seconds: 0
+   > contract address:    0x8eA52Ec30dBcB39928DA60b6e06df958bf10bbA9
+   > account:             0x8aa9085eC8119e01BcbF8Ad57853075104AF834e
+   > balance:             2.780711519
+   > gas used:            815302
+   > gas price:           25 gwei
+   > value sent:          0 ETH
+   > total cost:          0.02038255 ETH
+
+
+   Replacing 'Exchange'
+   --------------------
+   > transaction hash:    0x4f0a42721a0a093bb296e738691f12d76c873ba35ad3061a14ef1270c26addd5
+   > Blocks: 2            Seconds: 8
+   > contract address:    0xbf306351d57012A3E9E9c2824f17030a7429DbB1
+   > account:             0x8aa9085eC8119e01BcbF8Ad57853075104AF834e
+   > balance:             2.730898294
+   > gas used:            1992529
+   > gas price:           25 gwei
+   > value sent:          0 ETH
+   > total cost:          0.049813225 ETH
+
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:         0.070195775 ETH
+
+
+Summary
+=======
+> Total deployments:   3
+> Final cost:          0.07457285 ETH
