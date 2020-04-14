@@ -2,7 +2,9 @@
   "name": "blockchain-developer-bootcamp",
   "version": "0.1.0",
   "engines": {   
-  "npm": "5.6.0"},
+  "npm": "5.6.0",
+   "node": "9.10.0"
+},
   "description": "Decentralized Ethereum Token Exchange",
   "author": "MartinG2020@dappuniversity.com",
   "private": true,
