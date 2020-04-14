@@ -1,11 +1,10 @@
 {
   "name": "blockchain-developer-bootcamp",
   "version": "0.1.0",
-  "engines": {
-    "node": "9.10.0",
+  "engines": {   
   "npm": "5.6.0"},
   "description": "Decentralized Ethereum Token Exchange",
-  "author": "gregory@dappuniversity.com",
+  "author": "MartinG2020@dappuniversity.com",
   "private": true,
   "dependencies": {
     "@babel/plugin-transform-parameters": "^7.4.4",
